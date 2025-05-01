@@ -30,3 +30,15 @@ keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" 
 keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
+
+keymap.set("n", "<leader>r", function()
+  vim.cmd("w") -- Speichern
+
+  -- Alle Compilerprozesse beenden (hart), sicherstellen dass nichts mehr läuft
+  vim.cmd("VimtexStopAll")
+
+  -- Danach sofort neu kompilieren
+  vim.defer_fn(function()
+    vim.cmd("VimtexCompile")
+  end, 200) -- 200ms kurze Pause, reicht locker aus
+end, { desc = "Force restart vimtex compile" })
