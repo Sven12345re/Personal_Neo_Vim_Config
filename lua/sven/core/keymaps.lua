@@ -42,3 +42,5 @@ keymap.set("n", "<leader>r", function()
     vim.cmd("VimtexCompile")
   end, 200) -- 200ms kurze Pause, reicht locker aus
 end, { desc = "Force restart vimtex compile" })
+
+vim.keymap.set("n", "<leader>term", ":10split<CR>:edit term://bash<CR>", { desc = "Open terminal in a window below" })
